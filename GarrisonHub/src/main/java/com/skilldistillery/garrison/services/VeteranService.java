@@ -12,4 +12,7 @@ public interface VeteranService {
 
 	Veteran updateVeteran(Integer id, Veteran veteran);
 
+	boolean deleteVeteran(Integer id);
+
+
 }

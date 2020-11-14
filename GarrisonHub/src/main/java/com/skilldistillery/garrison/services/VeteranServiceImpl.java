@@ -49,4 +49,16 @@ public class VeteranServiceImpl implements VeteranService {
 		}
 		return veteran;
 	}
+
+	@Override
+	public boolean deleteVeteran(Integer id) {
+		boolean deleted = false;
+		Optional<Veteran> veteranOpt = vetRepo.findById(id);
+		if (veteranOpt.isPresent()) {
+			vetRepo.delete(veteranOpt.get());
+			
+			deleted = true;
+		}
+		return deleted;
+	}
 }
