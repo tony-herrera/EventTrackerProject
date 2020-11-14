@@ -50,8 +50,9 @@ class GarrisonTest {
 		
 		assertNotNull(vet);
 		assertEquals("Tony", vet.getFirstName());
-		
-		
+		assertEquals("tony.herrera@gmail.com", vet.getEmail());
+		assertEquals("Herrera", vet.getLastName());
+		assertEquals(1, vet.getAssignRecruiter());
 		
 	}
 

@@ -1,5 +1,8 @@
 package com.skilldistillery.garrison.entities;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,6 +18,55 @@ public class Veteran {
 
 	@Column(name = "first_name")
 	private String firstName;
+
+	private String branch;
+
+	public Veteran(int id, String firstName, String branch, String lastName, String email, String phoneNumber,
+			String careerInterest, Integer dodSkillBridge, LocalDate eaos, Integer assignRecruiter,
+			String dutyStation) {
+		super();
+		this.id = id;
+		this.firstName = firstName;
+		this.branch = branch;
+		this.lastName = lastName;
+		this.email = email;
+		this.phoneNumber = phoneNumber;
+		this.careerInterest = careerInterest;
+		this.dodSkillBridge = dodSkillBridge;
+		this.eaos = eaos;
+		this.assignRecruiter = assignRecruiter;
+		this.dutyStation = dutyStation;
+	}
+
+	public String getBranch() {
+		return branch;
+	}
+
+	public void setBranch(String branch) {
+		this.branch = branch;
+	}
+
+	@Column(name = "last_name")
+	private String lastName;
+
+	private String email;
+
+	@Column(name = "phone_number")
+	private String phoneNumber;
+
+	@Column(name = "career_interest")
+	private String careerInterest;
+
+	@Column(name = "dod_skill_bridge")
+	private Integer dodSkillBridge;
+
+	private LocalDate eaos;
+
+	@Column(name = "assign_recruiter")
+	private Integer assignRecruiter;
+
+	@Column(name = "duty_station")
+	private String dutyStation;
 
 	public int getId() {
 		return id;
@@ -32,10 +84,68 @@ public class Veteran {
 		this.firstName = firstName;
 	}
 
-	public Veteran(int id, String firstName) {
-		super();
-		this.id = id;
-		this.firstName = firstName;
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
+
+	public String getCareerInterest() {
+		return careerInterest;
+	}
+
+	public void setCareerInterest(String careerInterest) {
+		this.careerInterest = careerInterest;
+	}
+
+	public Integer getDodSkillBridge() {
+		return dodSkillBridge;
+	}
+
+	public void setDodSkillBridge(Integer dodSkillBridge) {
+		this.dodSkillBridge = dodSkillBridge;
+	}
+
+	public LocalDate getEaos() {
+		return eaos;
+	}
+
+	public void setEaos(LocalDate eaos) {
+		this.eaos = eaos;
+	}
+
+	public Integer getAssignRecruiter() {
+		return assignRecruiter;
+	}
+
+	public void setAssignRecruiter(Integer assignRecruiter) {
+		this.assignRecruiter = assignRecruiter;
+	}
+
+	public String getDutyStation() {
+		return dutyStation;
+	}
+
+	public void setDutyStation(String dutyStation) {
+		this.dutyStation = dutyStation;
 	}
 
 	public Veteran() {
@@ -66,7 +176,10 @@ public class Veteran {
 
 	@Override
 	public String toString() {
-		return "Veteran [id=" + id + ", firstName=" + firstName + "]";
+		return "Veteran [id=" + id + ", firstName=" + firstName + ", branch=" + branch + ", lastName=" + lastName
+				+ ", email=" + email + ", phoneNumber=" + phoneNumber + ", careerInterest=" + careerInterest
+				+ ", dodSkillBridge=" + dodSkillBridge + ", eaos=" + eaos + ", assignRecruiter=" + assignRecruiter
+				+ ", dutyStation=" + dutyStation + "]";
 	}
 
 }

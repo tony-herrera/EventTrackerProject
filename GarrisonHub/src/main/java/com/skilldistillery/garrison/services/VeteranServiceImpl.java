@@ -1,6 +1,7 @@
 package com.skilldistillery.garrison.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,9 +16,37 @@ public class VeteranServiceImpl implements VeteranService {
 	private VeteranRepository vetRepo;
 
 	@Override
-	public List<Veteran> getAllVeterans() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Veteran> index() {
+		return vetRepo.findAll();
 	}
 
+	@Override
+	public Veteran addVeteran(Veteran veteran) {
+		return vetRepo.saveAndFlush(veteran);
+
+	}
+
+	@Override
+	public Veteran updateVeteran(Integer id, Veteran veteran) {
+
+		Optional<Veteran> veteranOp = vetRepo.findById(id);
+		if (veteranOp.isPresent()) {
+			Veteran vet = veteranOp.get();
+			vet.setFirstName(vet.getFirstName());
+			vet.setLastName(vet.getFirstName());
+			vet.setBranch(vet.getBranch());
+			vet.setEaos(vet.getEaos());
+			vet.setAssignRecruiter(vet.getAssignRecruiter());
+			vet.setDutyStation(vet.getDutyStation());
+			vet.setEmail(vet.getEmail());
+			vet.setPhoneNumber(vet.getPhoneNumber());
+			vet.setCareerInterest(vet.getCareerInterest());
+			vet.setDodSkillBridge(vet.getDodSkillBridge());
+
+			vetRepo.saveAndFlush(veteran);
+		} else {
+			veteran = null;
+		}
+		return veteran;
+	}
 }
