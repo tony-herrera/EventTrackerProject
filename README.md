@@ -11,7 +11,8 @@ themselves to the database inputting pertinent information related
 to their transition out of the military. Here, they can access workforce
 recruiters who specialize in working with veterans to make that transition
 smooth. Also, members can specify that they are interested in a particular
-DOD Skill Bridge program and sign up if they choose to do so.
+DOD Skill Bridge program and sign up if they choose to do so. The event to be
+tracked is the service members EAOS, which is their End of Active Obligated Service.
 
 ## Login Information
 
