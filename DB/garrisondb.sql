@@ -23,6 +23,15 @@ DROP TABLE IF EXISTS `veteran` ;
 CREATE TABLE IF NOT EXISTS `veteran` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `first_name` VARCHAR(45) NOT NULL,
+  `last_name` VARCHAR(45) NOT NULL,
+  `branch` VARCHAR(40) NOT NULL COMMENT '‘ARMY’, ‘NAVY’, ‘AIRFORCE’, ‘MARINES’, ‘COASTGUARD’, ',
+  `eaos` DATE NOT NULL,
+  `assign_recruiter` TINYINT NULL,
+  `duty_station` VARCHAR(70) NULL,
+  `email` VARCHAR(45) NOT NULL,
+  `phone_number` VARCHAR(45) NULL,
+  `career_interest` VARCHAR(100) NULL,
+  `dod_skill_bridge` TINYINT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
@@ -42,7 +51,7 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `garrisondb`;
-INSERT INTO `veteran` (`id`, `first_name`) VALUES (1, 'Tony');
+INSERT INTO `veteran` (`id`, `first_name`, `last_name`, `branch`, `eaos`, `assign_recruiter`, `duty_station`, `email`, `phone_number`, `career_interest`, `dod_skill_bridge`) VALUES (1, 'Tony', 'Herrera', 'Navy', '20200609', 1, 'Camp Pendleton', 'tony.herrera@gmail.com', '7733293933', 'Java Developer', 1);
 
 COMMIT;
 
