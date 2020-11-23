@@ -4,7 +4,31 @@ window.addEventListener("load", function () {
 });
 
 function init() {
-  getVeteran();
+  document.newVeteranForm.submit.addEventListener("click", function (e) {
+    e.preventDefault();
+
+    let newVeteran = {};
+    newVeteran.firstName = document.newVeteranForm.firstName.value;
+    newVeteran.lastName = document.newVeteranForm.lastName.value;
+    newVeteran.email = document.newVeteranForm.email.value;
+    newVeteran.phoneNumber = document.newVeteranForm.phoneNumber.value;
+    newVeteran.eaos = document.newVeteranForm.eaos.value;
+    newVeteran.dutyStation = document.newVeteranForm.dutyStation.value;
+    newVeteran.dodSkillBridge = document.newVeteranForm.dodSkillBridge.value;
+    newVeteran.assignRecruiter = document.newVeteranForm.assignRecruiter.value;
+    newVeteran.careerInterest = document.newVeteranForm.careerInterest.value;
+    newVeteran.branch = document.newVeteranForm.branch.value;
+    window.location = window.location
+    addOrUpdateVeteran(newVeteran);
+  });
+
+  document.veteranForm.lookup.addEventListener("click", function (e) {
+    e.preventDefault();
+    let veteranId = document.veteranForm.veteranId.value;
+    if (!isNaN(veteranId) && veteranId > 0) {
+      getVeteran(veteranId);
+    }
+  });
   listVeterans();
 
   console.log("in init() still ");
@@ -12,7 +36,7 @@ function init() {
 
 function listVeterans() {
   let xhr = new XMLHttpRequest();
-  xhr.open('GET', 'api/veterans/');
+  xhr.open("GET", "api/veterans/");
 
   xhr.onreadystatechange = function () {
     if (xhr.readyState === 4) {
@@ -44,12 +68,12 @@ function displayVeteranList(vetList) {
   var th8 = document.createElement("th");
 
   th1.textContent = "ID";
-  th2.textContent = "firstName";
-  th3.textContent = "lastName";
-  th4.textContent = "eaos";
-  th5.textContent = "branch";
+  th2.textContent = "FirstName";
+  th3.textContent = "LastName";
+  th4.textContent = "EAOS";
+  th5.textContent = "Branch";
   th6.textContent = "";
-  th7.textContent = "Number of veterans: ";
+  th7.textContent = "Number of Veterans: ";
   th8.textContent = vetList.length;
 
   headTr.appendChild(th1);
@@ -83,8 +107,8 @@ function displayVeteranList(vetList) {
       event.preventDefault();
       getVeteran(vetList[i].id);
       tr.onclick = function (e) {
-      showUpdateForm(veteran.Id);
-    };
+        showUpdateForm(vetList[i].id);
+      };
     });
     td1.style.border = "solid";
     td2.style.border = "solid";
@@ -104,69 +128,37 @@ function displayVeteranList(vetList) {
   document.body.insertBefore(dataTableDiv, document.body.children[1]);
 }
 
-// function displayVeteranList(list) {
-//   table = document.createElement("table");
-//   table.style.border = 'solid';
-//   table.id = "vetList";
-//   keys = ["id", "firstName", "lastName", "email", "eaos", "branch"];
-//   let tBody = document.createElement("tBody");
-
-//   for (var keys = 0; )
-// let tBody = document.createElement("tBody");
-
-//   let tr = document.createElement("tr");
-
-//   for (const key of keys) {
-//     let th = document.createElement("th");
-//     th.textContent = key;
-//     tr.appendChild(th);
-//   }
-//   table.appendChild(tr);
-
-//   for (const veteran of list) {
-//     let tr = document.createElement("tr");
-
-//     // tr.onclick = function (e) {
-//     //   showUpdateForm(veteran.Id);
-//     // };
-
-//     for (const key of keys) {
-//       let td = document.createElement("td");
-
-//       td.textContent = veteran[key];
-
-//       tr.appendChild(td);
-//     }
-//     table.appendChild(tr);
-//   }
-// }
+function addOrUpdateVeteran(veteran) {
+  let xhr = new XMLHttpRequest();
+  xhr.open("POST", "api/veterans");
+  xhr.setRequestHeader("Content-type", "application/json");
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState === 4) {
+      if (xhr.status === 201) {
+        let createVeteran = JSON.parse(xhr.responseText);
+        displayVeteran(createVeteran);
+      }
+    } else {
+      displayError("Cannot Add Veteran to Database.");
+    }
+  };
+  createVeteran = JSON.stringify(veteran);
+  xhr.send(createVeteran);
+}
 
 function getVeteran(veteranId) {
-  document.veteranForm.lookup.addEventListener("click", function (e) {
-    e.preventDefault();
-    let veteranId = document.veteranForm.veteranId.value;
-    if (!isNaN(veteranId) && veteranId > 0) {
-      getVeteran(veteranId);
-    }
-  });
-  document.newVeteranForm.submit.addEventListener("click", function (e) {
-    e.preventDefault();
-    postNewVeteran(e);
-  });
-  console.log("getVeteran(): veteranId=" + veteranId);
-
   let xhr = new XMLHttpRequest();
   xhr.open("GET", "api/veterans/" + veteranId);
   xhr.onreadystatechange = function () {
     if (xhr.readyState === 4) {
       if (xhr.status === 200) {
         let veteran = JSON.parse(xhr.responseText);
-        console.log(xhr.responseText);
-        console.log(veteran);
+        // console.log(xhr.responseText);
+        // console.log(veteran);
         displayVeteran(veteran);
       }
     } else {
-      // console.error('No Veteran by that Identifier Exists.');
+      // console.error("No Veteran by that Identifier Exists.");
       displayError("No Veteran by that Identifier Exists.");
     }
   };
@@ -177,6 +169,7 @@ function displayError(msg) {
   let div = document.getElementById("veteranData");
   div.textContent = msg;
 }
+
 function displayVeteran(veteran) {
   let dataDiv = document.getElementById("veteranData");
   dataDiv.textContent = "";
@@ -219,22 +212,103 @@ function displayVeteran(veteran) {
   let bq = document.createElement("blockquote");
   bq.textContent = veteran.branch;
   dataDiv.appendChild(bq);
+
+  var updateVeteranForm = document.createElement("form");
+
+  var veteranFirstName = document.createElement("input");
+  veteranFirstName.name = "firstName";
+  veteranFirstName.type = "text";
+  veteranFirstName.value = veteran.firstName;
+
+  var veteranLastName = document.createElement("input");
+  veteranLastName.name = "lastName";
+  veteranLastName.type = "text";
+  veteranLastName.value = veteran.lastName;
+
+  var veteranEmail = document.createElement("input");
+  veteranEmail.name = "Email";
+  veteranEmail.type = "text";
+  veteranEmail.value = veteran.email;
+
+  var veteranPhoneNumber = document.createElement("input");
+  veteranPhoneNumber.name = "phoneNumber";
+  veteranPhoneNumber.type = "text";
+  veteranPhoneNumber.value = veteran.phoneNumber;
+
+  var veteranEAOS = document.createElement("input");
+  veteranEAOS.name = "EAOS";
+  veteranEAOS.type = "text";
+  veteranEAOS.value = veteran.eaos;
+
+  var veterandutyStation = document.createElement("input");
+  veterandutyStation.name = "dutyStation";
+  veterandutyStation.type = "text";
+  veterandutyStation.value = veteran.dutyStation;
+
+  var veterandodSkillBridge = document.createElement("input");
+  veterandodSkillBridge.name = "dodSkillBridge";
+  veterandodSkillBridge.type = "text";
+  veterandodSkillBridge.value = veteran.dodSkillBridge;
+
+  var veteranAssignRecruiter = document.createElement("input");
+  veteranAssignRecruiter.name = "assignRecruiter";
+  veteranAssignRecruiter.type = "text";
+  veteranAssignRecruiter.value = veteran.assignRecruiter;
+
+  var veterancareerInterest = document.createElement("input");
+  veterancareerInterest.name = "careerInterest";
+  veterancareerInterest.type = "text";
+  veterancareerInterest.value = veteran.careerInterest;
+
+  var veteranBranch = document.createElement("input");
+  veteranBranch.name = "branch";
+  veteranBranch.type = "text";
+  veteranBranch.value = veteran.branch;
+
+  updateVeteranForm.appendChild(veteranFirstName);
+  updateVeteranForm.appendChild(veteranLastName);
+  updateVeteranForm.appendChild(veteranEmail);
+  updateVeteranForm.appendChild(veteranPhoneNumber);
+  updateVeteranForm.appendChild(veteranEAOS);
+  updateVeteranForm.appendChild(veterandutyStation);
+  updateVeteranForm.appendChild(veterandodSkillBridge);
+  updateVeteranForm.appendChild(veteranAssignRecruiter);
+  updateVeteranForm.appendChild(veterancareerInterest);
+  updateVeteranForm.appendChild(veteranBranch);
+
+  var deleteButton = document.createElement("button");
+  deleteButton.innerHTML = "Delete this Veteran";
+  dataDiv.appendChild(deleteButton);
+  deleteButton.addEventListener("click", function (e) {
+    window.location = window.location;
+    deleteVeteran(veteran.id);
+  });
+
+  var updateButton = document.createElement("button");
+  updateButton.innerHTML = "Update this Veteran";
+  dataDiv.appendChild(updateButton);
+  updateButton.addEventListener("click", function (e) {
+    e.preventDefault();
+
+    var updatedVeteran = {};
+    updatedVeteran.id = veteran.id;
+    updatedVeteran.firstName = updateVeteranForm.firstName.value;
+    updatedVeteran.lastName = updateVeteranForm.lastName.value;
+    updatedVeteran.email = updateVeteranForm.Email.value;
+    updatedVeteran.phoneNumber = updateVeteranForm.phoneNumber.value;
+    updatedVeteran.eaos = updateVeteranForm.EAOS.value;
+    updatedVeteran.dutyStation = updateVeteranForm.dutyStation.value;
+    updatedVeteran.dodSkillBridge = updateVeteranForm.dodSkillBridge.value;
+    updatedVeteran.assignRecruiter = updateVeteranForm.assignRecruiter.value;
+    updatedVeteran.careerInterest = updateVeteranForm.careerInterest.value;
+    updatedVeteran.branch = updateVeteranForm.branch.value;
+    window.location = window.location;
+    updateTheVeteran(updatedVeteran);
+  });
+  dataDiv.appendChild(updateVeteranForm);
 }
 
 function postNewVeteran(e) {
-  let form = document.newVeteranForm;
-  let newVeteran = {
-    firstName: form.firstName.value,
-    lastName: form.lastName.value,
-    email: form.email.value,
-    phoneNumber: form.phoneNumber.value,
-    eaos: form.eaos.value,
-    dutyStation: form.dutyStation.value,
-    dodSkillBridge: form.dodSkillBridge.value,
-    assignRecruiter: form.assignRecruiter.value,
-    careerInterest: form.careerInterest.value,
-    branch: form.branch.value,
-  };
   console.log(newVeteran);
   let xhr = new XMLHttpRequest();
   xhr.open("POST", "api/veterans");
@@ -258,8 +332,45 @@ function postNewVeteran(e) {
   xhr.send(JSON.stringify(newVeteran));
 }
 
-// xhr.open('PUT', api/garrisonhub/' + garrisonId);
+function deleteVeteran(veteranId) {
+  let xhr = new XMLHttpRequest();
+  xhr.open("DELETE", "api/veterans/" + veteranId);
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState === 4) {
+      if (xhr.status === 204) {
+        var dataDiv = document.getElementById("veteranInformation");
+        dataDiv.textContent = "Veteran Has Been Removed From the System";
+      }
+    } else {
+      displayError("Veteran Has Been Removed From the System");
+    }
+  };
+  xhr.send();
+}
 
-// xhr.send(JSON.stringify(updateVeteran))
+function updateTheVeteran(updatedVeteran) {
+  let xhr = new XMLHttpRequest();
+  xhr.open("PUT", "api/veterans/" + updatedVeteran.id);
+  xhr.setRequestHeader("Content-type", "application/json");
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState === 4) {
+      if (xhr.status === 201 || xhr.status === 200) {
+        let savedVeteran = JSON.parse(xhr.responseText);
+        displayVeteran(savedVeteran);
+      } else {
+        console.error(
+          "There was an error updating this service member, status=" +
+            xhr.status
+        );
+        console.error(xhr.responseText);
+        displayError(
+          "There was an error adding this service member. Please Refer to the SOP."
+        );
+      }
+    }
+  };
 
-//xhr.open('DELETE', 'api/veterans/' + veteranId);
+  savedVeteran = JSON.stringify(updatedVeteran);
+
+  xhr.send(savedVeteran);
+}
