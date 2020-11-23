@@ -38,6 +38,12 @@ deleteVeteran DELETE api/veterans/{id} Deletes the veteran from database
 * Git
 * Github
 * JUnit Testing
+* Build HTML with JavaScript
+* Consume and parse JSON responses with JavaScript
+* Use CRUD operations with XMLHttpRequest
+* Visual Studio Code
+
+
 
 ## Key Lessons Learned
 1. Learning the systems of REST API in the beginning was challenging to understand,
@@ -52,3 +58,16 @@ determination I began really enjoying the simplicity of it.
 not understand that how the function @RequestBody worked. I eventually realized
 how the object I was attempting to pass needed to be called upon by this annotation
 in order to be able to use its properties when attempting to map it.
+
+4. JavaScript is similar to Java but vastly different. With that being said,
+learning JS fundamentals and implementing them within a project was extremely
+difficult to comprehend. Specifically, DOM manipulation and how JSON take the role
+of objects. I will admit, it is still somewhat unclear even with the completion
+of this project, however, working through the many 415 errors helped me gain a
+greater understanding of these concepts.
+
+5. I mentioned some errors such as a 415 media type of error which I realized
+late into the game, and could still be completely wrong about, but the two biggest
+pieces of code I struggled with and learned from were these,
+`xhr.setRequestHeader("Content-type", "application/json");` and
+`window.location = window.location`.
