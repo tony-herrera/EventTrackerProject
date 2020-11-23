@@ -52,6 +52,10 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 START TRANSACTION;
 USE `garrisondb`;
 INSERT INTO `veteran` (`id`, `first_name`, `last_name`, `branch`, `eaos`, `assign_recruiter`, `duty_station`, `email`, `phone_number`, `career_interest`, `dod_skill_bridge`) VALUES (1, 'Tony', 'Herrera', 'Navy', '20200609', 1, 'Camp Pendleton', 'tony.herrera@gmail.com', '7733293933', 'Java Developer', 1);
+INSERT INTO `veteran` (`id`, `first_name`, `last_name`, `branch`, `eaos`, `assign_recruiter`, `duty_station`, `email`, `phone_number`, `career_interest`, `dod_skill_bridge`) VALUES (2, 'John', 'Johnson', 'Marine', '20200403', 2, 'Camp Pendleton', 'John@hotmail.com', '1234567445', NULL, NULL);
+INSERT INTO `veteran` (`id`, `first_name`, `last_name`, `branch`, `eaos`, `assign_recruiter`, `duty_station`, `email`, `phone_number`, `career_interest`, `dod_skill_bridge`) VALUES (3, 'Ray', 'Michaels', 'Army', '20190403', 1, 'Miramar', 'hello@yahoo.com', '2345678444', NULL, NULL);
+INSERT INTO `veteran` (`id`, `first_name`, `last_name`, `branch`, `eaos`, `assign_recruiter`, `duty_station`, `email`, `phone_number`, `career_interest`, `dod_skill_bridge`) VALUES (4, 'Bernard', 'Santiago', 'Airforce', '20220304', 2, 'Ft. Bragg', 'flyhigh@gmail.com', '777444333', NULL, NULL);
+INSERT INTO `veteran` (`id`, `first_name`, `last_name`, `branch`, `eaos`, `assign_recruiter`, `duty_station`, `email`, `phone_number`, `career_interest`, `dod_skill_bridge`) VALUES (5, 'Lawrence', 'Hobbs', 'Coast Guard', '20230709', 1, 'NASCC', 'seawater@water.com', '999444333', NULL, NULL);
 
 COMMIT;
 

@@ -1,7 +1,6 @@
 package com.skilldistillery.garrison.services;
 
 import java.util.List;
-
 import com.skilldistillery.garrison.entities.Veteran;
 
 public interface VeteranService {
@@ -13,6 +12,8 @@ public interface VeteranService {
 	Veteran updateVeteran(Integer id, Veteran veteran);
 
 	boolean deleteVeteran(Integer id);
+
+	Veteran findById(int veteranId);
 
 
 }

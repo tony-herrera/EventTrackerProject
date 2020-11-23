@@ -1,7 +1,5 @@
 package com.skilldistillery.garrison.entities;
 
-import java.time.LocalDate;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -21,8 +19,7 @@ public class Veteran {
 	private String branch;
 
 	public Veteran(int id, String firstName, String branch, String lastName, String email, String phoneNumber,
-			String careerInterest, Integer dodSkillBridge, LocalDate eaos, Integer assignRecruiter,
-			String dutyStation) {
+			String careerInterest, String dodSkillBridge, String eaos, String assignRecruiter, String dutyStation) {
 		super();
 		this.id = id;
 		this.firstName = firstName;
@@ -57,12 +54,12 @@ public class Veteran {
 	private String careerInterest;
 
 	@Column(name = "dod_skill_bridge")
-	private Integer dodSkillBridge;
+	private String dodSkillBridge;
 
-	private LocalDate eaos;
+	private String eaos;
 
 	@Column(name = "assign_recruiter")
-	private Integer assignRecruiter;
+	private String assignRecruiter;
 
 	@Column(name = "duty_station")
 	private String dutyStation;
@@ -115,27 +112,27 @@ public class Veteran {
 		this.careerInterest = careerInterest;
 	}
 
-	public Integer getDodSkillBridge() {
+	public String getDodSkillBridge() {
 		return dodSkillBridge;
 	}
 
-	public void setDodSkillBridge(Integer dodSkillBridge) {
+	public void setDodSkillBridge(String dodSkillBridge) {
 		this.dodSkillBridge = dodSkillBridge;
 	}
 
-	public LocalDate getEaos() {
+	public String getEaos() {
 		return eaos;
 	}
 
-	public void setEaos(LocalDate eaos) {
+	public void setEaos(String eaos) {
 		this.eaos = eaos;
 	}
 
-	public Integer getAssignRecruiter() {
+	public String getAssignRecruiter() {
 		return assignRecruiter;
 	}
 
-	public void setAssignRecruiter(Integer assignRecruiter) {
+	public void setAssignRecruiter(String assignRecruiter) {
 		this.assignRecruiter = assignRecruiter;
 	}
 

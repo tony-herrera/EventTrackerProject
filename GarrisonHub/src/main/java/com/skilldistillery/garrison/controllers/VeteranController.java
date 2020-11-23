@@ -1,6 +1,7 @@
 package com.skilldistillery.garrison.controllers;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -34,13 +35,17 @@ public class VeteranController {
 	public List<Veteran> listAllVeterans() {
 		return svc.index();
 	}
+	
+	@GetMapping("veterans/{veteranId}")
+	public Veteran findById(@PathVariable Integer veteranId, HttpServletResponse response) {
+		Veteran veteran = svc.findById(veteranId);
+		return svc.findById(veteranId);
+	}
 
 	@PostMapping("veterans")
 	public Veteran addVeteran(@RequestBody Veteran veteran, HttpServletRequest request, HttpServletResponse response) {
 
-		System.out.println("*********");
 		System.out.println(veteran);
-		System.out.println("*******");
 		veteran = svc.addVeteran(veteran);
 		if (veteran == null) {
 			response.setStatus(400);
@@ -57,9 +62,7 @@ public class VeteranController {
 	@PutMapping("veterans/{id}")
 	public Veteran updateVeteran(@PathVariable Integer id, @RequestBody Veteran veteran, HttpServletResponse response,
 			HttpServletRequest request) {
-		System.out.println("***");
 		System.out.println(veteran);
-		System.out.println("***");
 		veteran = svc.updateVeteran(id, veteran);
 		if (veteran == null) {
 			response.setStatus(404);

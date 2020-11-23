@@ -21,6 +21,11 @@ public class VeteranServiceImpl implements VeteranService {
 	}
 
 	@Override
+	public Veteran findById(int veteranId) {
+		return vetRepo.findById(veteranId);
+	}
+
+	@Override
 	public Veteran addVeteran(Veteran veteran) {
 		return vetRepo.saveAndFlush(veteran);
 
@@ -56,7 +61,7 @@ public class VeteranServiceImpl implements VeteranService {
 		Optional<Veteran> veteranOpt = vetRepo.findById(id);
 		if (veteranOpt.isPresent()) {
 			vetRepo.delete(veteranOpt.get());
-			
+
 			deleted = true;
 		}
 		return deleted;
