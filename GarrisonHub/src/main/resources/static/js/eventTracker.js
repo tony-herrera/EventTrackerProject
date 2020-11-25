@@ -18,7 +18,7 @@ function init() {
     newVeteran.assignRecruiter = document.newVeteranForm.assignRecruiter.value;
     newVeteran.careerInterest = document.newVeteranForm.careerInterest.value;
     newVeteran.branch = document.newVeteranForm.branch.value;
-    window.location = window.location
+    window.location = window.location;
     addOrUpdateVeteran(newVeteran);
   });
 
