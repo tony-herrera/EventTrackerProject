@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.skilldistillery.garrison.entities.Veteran;
 import com.skilldistillery.garrison.services.VeteranService;
 
+@CrossOrigin({ "*", "http://localhost:4205" })
 @RequestMapping("api")
 @RestController
 public class VeteranController {
@@ -35,7 +37,7 @@ public class VeteranController {
 	public List<Veteran> listAllVeterans() {
 		return svc.index();
 	}
-	
+
 	@GetMapping("veterans/{veteranId}")
 	public Veteran findById(@PathVariable Integer veteranId, HttpServletResponse response) {
 		Veteran veteran = svc.findById(veteranId);
