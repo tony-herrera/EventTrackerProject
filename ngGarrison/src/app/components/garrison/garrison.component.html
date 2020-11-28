@@ -1,7 +1,100 @@
-<h1> Welcome, to Garrison!</h1>
+<h1>Welcome, to Garrison!</h1>
 
-<form>
-<input type="text" name="firstName" placeholder="First Name" [(ngModel)] = "newVeteran.firstName" /><br>
+<div *ngIf="selected">
+  <h3>{{ selected.vetId }} {{ selected.firstName }} {{ selected.lastName }}</h3>
 
+  <ul>
+    <li>Email: {{ selected.email }}</li>
+    <li>Phone Number: {{ selected.phoneNumber }}</li>
+    <li>Career Interest: {{ selected.careerInterest }}</li>
+    <li>DoD Skill Bridge Program: {{ selected.dodSkillBridge }}</li>
+    <li>EAOS: {{ selected.eaos }}</li>
+    <li>Assign a Recruiter?: {{ selected.assignRecruiter }}</li>
+    <li>Duty Station: {{ selected.dutyStation }}</li>
+    <li>
+      <ul>
+        <li *ngFor="let type of selected.types">{{ type.firstName }}</li>
+      </ul>
+    </li>
+  </ul>
+  <button (click)="selected = null" ?>Back To Veteran List</button>
+  <input (click)="onSubmit()" type="submit" value="Add Veteran" />
+</div>
 
-</form>
+<div *ngIf="!selected">
+  <table>
+    <thead>
+      <tr>
+        <td>Id</td>
+        <td>First Name</td>
+        <td>Last Name</td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let veteran of veterans" (click)="selected = veteran">
+        <td>{{ veteran.vetId }}</td>
+        <td>{{ veteran.firstName }}</td>
+        <td>{{ veteran.lastName }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div>
+  <form>
+    <input
+      type="text"
+      name="firstName"
+      placeholder="First Name"
+      [(ngModel)]="newVeteran.firstName"
+    /><br />
+    <input
+      type="text"
+      name="lastName"
+      placeholder="Last Name"
+      [(ngModel)]="newVeteran.lastName"
+    /><br />
+    <input
+      type="text"
+      name="email"
+      placeholder="Email"
+      [(ngModel)]="newVeteran.email"
+    /><br />
+    <input
+      type="text"
+      name="phoneNumber"
+      placeholder="Phone Number"
+      [(ngModel)]="newVeteran.phoneNumber"
+    /><br />
+    <input
+      type="text"
+      name="careerInterest"
+      placeholder="Career Interest"
+      [(ngModel)]="newVeteran.careerInterest"
+    /><br />
+    <input
+      type="text"
+      name="dodSkillBridge"
+      placeholder="Skill Bridge"
+      [(ngModel)]="newVeteran.dodSkillBridge"
+    /><br />
+    <input
+      type="text"
+      name="eaos"
+      placeholder="EAOS"
+      [(ngModel)]="newVeteran.eaos"
+    /><br />
+    <input
+      type="text"
+      name="assignRecruiter"
+      placeholder="Recruiter"
+      [(ngModel)]="newVeteran.assignRecruiter"
+    /><br />
+    <input
+      type="text"
+      name="dutyStation"
+      placeholder="Duty Station"
+      [(ngModel)]="newVeteran.dutyStation"
+    /><br />
+    <input (click)="onSubmit()" type="submit" value="Add Veteran" />
+  </form>
+</div>

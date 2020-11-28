@@ -10,11 +10,11 @@ import { GarrisonService } from '../../services/garrison.service';
 export class GarrisonComponent implements OnInit {
   display = true;
   veterans: Veteran[] = [];
-  title = '';
+  firstName = '';
 
   onSubmit() {
-    this.veterans.push(this.newVeteran);
     this.garrisonService.create(this.newVeteran);
+    this.veterans.push(this.newVeteran);
     // this.veterans = this.garrisonService.index();
     this.newVeteran = new Veteran();
   }
