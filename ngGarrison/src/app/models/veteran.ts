@@ -14,29 +14,29 @@ export class Veteran {
 
   constructor(
     vetId?: number,
-    firstName?: string,
-    lastName?: string,
-    branch?: string,
-    email?: string,
-    phoneNumber?: string,
-    careerInterest?: string,
-    dodSkillBridge?: string,
+    fn?: string,
+    ln?: string,
+    br?: string,
+    em?: string,
+    pn?: string,
+    ci?: string,
+    dod?: string,
     eaos?: string,
-    assignRecruiter?: string,
-    dutyStation?: string,
+    ar?: string,
+    ds?: string,
     types?: any[]
   ) {
     this.vetId = vetId;
-    this.firstName = firstName;
-    this.lastName = lastName;
-    this.branch = branch;
-    this.email = email;
-    this.phoneNumber = phoneNumber;
-    this.careerInterest = careerInterest;
-    this.dodSkillBridge = dodSkillBridge;
+    this.firstName = fn;
+    this.lastName = ln;
+    this.branch = br;
+    this.email = em;
+    this.phoneNumber = pn;
+    this.careerInterest = ci;
+    this.dodSkillBridge = dod;
     this.eaos = eaos;
-    this.assignRecruiter = assignRecruiter;
-    this.dutyStation = dutyStation;
+    this.assignRecruiter = ar;
+    this.dutyStation = ds;
     this.types = types ? types : [];
   }
 }
