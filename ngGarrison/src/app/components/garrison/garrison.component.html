@@ -1,90 +1,107 @@
-<h1>
-  Welcome to {{ title }} <br />
-</h1>
-<h2>Join in the ranks of your fellow service members!!</h2>
-<br>
-<h3>Fill Out The Form to Save Your Place in the Database</h3>
-<form *ngIf="!selected" #addVeteranForm="ngForm">
-  <input
-    type="text"
-    name="firstName"
-    placeholder="First"
-    [(ngModel)]="newVeteran.firstName"
-  />
-  <hr />
-  <input
-    type="text"
-    name="lastName"
-    placeholder="Last"
-    [(ngModel)]="newVeteran.lastName"
-  />
-  <hr />
-  <input
-    type="text"
-    name="email"
-    placeholder="Email"
-    [(ngModel)]="newVeteran.email"
-  />
-  <hr />
-  <input
-    type="text"
-    name="phoneNumber"
-    placeholder="Phone"
-    [(ngModel)]="newVeteran.phoneNumber"
-  />
-  <hr />
-  <input
-    type="date"
-    name="eaos"
-    placeholder="EAOS"
-    [(ngModel)]="newVeteran.eaos"
-  />
-  <hr />
-  <br />
-  <input
-    type="text"
-    name="careerInterest"
-    placeholder="Career Field Interest"
-    [(ngModel)]="newVeteran.careerInterest"
-  />
-  <hr />
-  <input
-    type="text"
-    name="dodSkillBridge"
-    placeholder="DOD Skill Bridge?"
-    [(ngModel)]="newVeteran.dodSkillBridge"
-  />
-  <hr />
-  <input
-    type="text"
-    name="dutyStation"
-    placeholder="Duty Station"
-    [(ngModel)]="newVeteran.dutyStation"
-  />
-  <hr />
-  <input
-    type="checkbox"
-    name="assignRecruiter"
-    [(ngModel)]="newVeteran.assignRecruiter"
-  />Assign Recruiter?
-  <hr />
-  <label>Branch: </label>
-  <select name="branch" [(ngModel)]="newVeteran.branch">
-    <option>AirForce</option>
-    <option>Army</option>
-    <option>Coast Guard</option>
-    <option>Marines</option>
-    <option>Navy</option>
-  </select>
-  <hr />
-  <input
-    type="submit"
-    name="submit"
-    value="Add Veteran"
-    (click)="addVeteran(addVeteranForm)"
-  />
-  Sign Up Today!
-</form>
+<div class="gallery">
+  <a
+    target="_blank"
+    href="https://cdn.aarp.net/content/dam/aarp/home-and-family/family-and-friends/2017/11/1140-veterans-voices-page.imgcache.rev80493b335ae9f1896da6b586a70db9b0.jpg
+  "
+  >
+    <img
+      src="https://cdn.aarp.net/content/dam/aarp/home-and-family/family-and-friends/2017/11/1140-veterans-voices-page.imgcache.rev80493b335ae9f1896da6b586a70db9b0.jpg
+    "
+      alt="Soldiers With The American Flag"
+      width="5000"
+      height="400"
+    />
+  </a>
+  <div class="desc">
+    Welcome to {{ title }} <br />
+    Join in the ranks of your fellow service members!!
+  </div>
+</div>
+<br />
+<div>
+  <form *ngIf="!selected" #addVeteranForm="ngForm">
+    <h3>Fill Out The Form to Save Your Place in the Database</h3>
+    <input
+      type="text"
+      name="firstName"
+      placeholder="First"
+      [(ngModel)]="newVeteran.firstName"
+    />
+    <hr />
+    <input
+      type="text"
+      name="lastName"
+      placeholder="Last"
+      [(ngModel)]="newVeteran.lastName"
+    />
+    <hr />
+    <input
+      type="text"
+      name="email"
+      placeholder="Email"
+      [(ngModel)]="newVeteran.email"
+    />
+    <hr />
+    <input
+      type="text"
+      name="phoneNumber"
+      placeholder="Phone"
+      [(ngModel)]="newVeteran.phoneNumber"
+    />
+    <hr />
+    <input
+      type="date"
+      name="eaos"
+      placeholder="EAOS"
+      [(ngModel)]="newVeteran.eaos"
+    />
+    <hr />
+    <br />
+    <input
+      type="text"
+      name="careerInterest"
+      placeholder="Career Field Interest"
+      [(ngModel)]="newVeteran.careerInterest"
+    />
+    <hr />
+    <input
+      type="text"
+      name="dodSkillBridge"
+      placeholder="DOD Skill Bridge?"
+      [(ngModel)]="newVeteran.dodSkillBridge"
+    />
+    <hr />
+    <input
+      type="text"
+      name="dutyStation"
+      placeholder="Duty Station"
+      [(ngModel)]="newVeteran.dutyStation"
+    />
+    <hr />
+    <input
+      type="checkbox"
+      name="assignRecruiter"
+      [(ngModel)]="newVeteran.assignRecruiter"
+    />Assign Recruiter?
+    <hr />
+    <label>Branch: </label>
+    <select name="branch" [(ngModel)]="newVeteran.branch">
+      <option>AirForce</option>
+      <option>Army</option>
+      <option>Coast Guard</option>
+      <option>Marines</option>
+      <option>Navy</option>
+    </select>
+    <hr />
+    <input
+      type="submit"
+      name="submit"
+      value="Add Veteran"
+      (click)="addVeteran(addVeteranForm)"
+    />
+    Sign Up Today!
+  </form>
+</div>
 <hr style="height: 2px; border-width: 0; color: gray; background-color: gray" />
 <hr style="height: 2px; border-width: 0; color: gray; background-color: gray" />
 <div *ngIf="selected && !editVeteran">
@@ -144,7 +161,7 @@
   <button (click)="updateVeteran(editVeteran)">Save</button>
   <button (click)="editVeteran = null">Cancel Changes</button>
 </form>
-<hr>
+<hr />
 <h2>Total Number of Veterans Registered: {{ getNumOfVets() }}</h2>
 <table border="2" *ngIf="!selected">
   <thead>
@@ -160,7 +177,7 @@
       <td (click)="displayVeteran(veteran)">{{ veteran.lastName }}</td>
       <td (click)="displayVeteran(veteran)">{{ veteran.eaos }}</td>
       <!-- <td> -->
-        <!-- <button (click)="deleteVeteran(veteran.vetId)">Delete Veteran</button> -->
+      <!-- <button (click)="deleteVeteran(veteran.vetId)">Delete Veteran</button> -->
       <!-- </td> -->
     </tr>
   </tbody>
