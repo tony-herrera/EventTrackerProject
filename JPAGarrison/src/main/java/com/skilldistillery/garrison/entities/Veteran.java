@@ -11,14 +11,14 @@ public class Veteran {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+	private int id;
 
 	@Column(name = "first_name")
 	private String firstName;
 
 	private String branch;
 
-	public Veteran(Integer id, String firstName, String branch, String lastName, String email, String phoneNumber,
+	public Veteran(int id, String firstName, String branch, String lastName, String email, String phoneNumber,
 			String careerInterest, String dodSkillBridge, String eaos, String assignRecruiter, String dutyStation) {
 		super();
 		this.id = id;
@@ -64,11 +64,11 @@ public class Veteran {
 	@Column(name = "duty_station")
 	private String dutyStation;
 
-	public Integer getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
@@ -148,11 +148,21 @@ public class Veteran {
 		super();
 	}
 
+
+
+	@Override
+	public String toString() {
+		return "Veteran [id=" + id + ", firstName=" + firstName + ", branch=" + branch + ", lastName=" + lastName
+				+ ", email=" + email + ", phoneNumber=" + phoneNumber + ", careerInterest=" + careerInterest
+				+ ", dodSkillBridge=" + dodSkillBridge + ", eaos=" + eaos + ", assignRecruiter=" + assignRecruiter
+				+ ", dutyStation=" + dutyStation + "]";
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + id;
 		return result;
 	}
 
@@ -165,20 +175,9 @@ public class Veteran {
 		if (getClass() != obj.getClass())
 			return false;
 		Veteran other = (Veteran) obj;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
+		if (id != other.id)
 			return false;
 		return true;
-	}
-
-	@Override
-	public String toString() {
-		return "Veteran [id=" + id + ", firstName=" + firstName + ", branch=" + branch + ", lastName=" + lastName
-				+ ", email=" + email + ", phoneNumber=" + phoneNumber + ", careerInterest=" + careerInterest
-				+ ", dodSkillBridge=" + dodSkillBridge + ", eaos=" + eaos + ", assignRecruiter=" + assignRecruiter
-				+ ", dutyStation=" + dutyStation + "]";
 	}
 
 }

@@ -1,7 +1,6 @@
 package com.skilldistillery.garrison.controllers;
 
 import java.util.List;
-import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -39,9 +38,12 @@ public class VeteranController {
 	}
 
 	@GetMapping("veterans/{veteranId}")
-	public Veteran findById(@PathVariable Integer veteranId, HttpServletResponse response) {
+	public Veteran findById(@PathVariable int veteranId, HttpServletResponse response) {
 		Veteran veteran = svc.findById(veteranId);
-		return svc.findById(veteranId);
+		if (veteran == null) {
+			response.setStatus(404);
+		}
+		return veteran;
 	}
 
 	@PostMapping("veterans")
@@ -50,7 +52,7 @@ public class VeteranController {
 		System.out.println(veteran);
 		veteran = svc.addVeteran(veteran);
 		if (veteran == null) {
-			response.setStatus(400);
+			response.setStatus(404);
 
 		} else {
 			response.setStatus(201);
@@ -61,36 +63,35 @@ public class VeteranController {
 		return veteran;
 	}
 
-	@PutMapping("veterans/{id}")
-	public Veteran updateVeteran(@PathVariable Integer id, @RequestBody Veteran veteran, HttpServletResponse response,
+	@PutMapping("veterans/{veteranId}")
+	public Veteran updateVeteran(@PathVariable Integer veteranId, @RequestBody Veteran veteran, HttpServletResponse response,
 			HttpServletRequest request) {
 		System.out.println(veteran);
-		veteran = svc.updateVeteran(id, veteran);
-		if (veteran == null) {
-			response.setStatus(404);
-		} else {
-			response.setStatus(201);
-			StringBuffer url = request.getRequestURL();
-			url.append("/").append(veteran.getId());
-			response.setHeader("Location", url.toString());
-		}
-		return veteran;
-	}
-
-	@DeleteMapping("veterans/{id}")
-	public boolean deleteVeteran(@PathVariable Integer id, HttpServletResponse response, HttpServletRequest request) {
 		try {
-			boolean deleted = svc.deleteVeteran(id);
-			if (deleted) {
-				response.setStatus(204);
-				return true;
-			} else {
+			veteran = svc.updateVeteran(veteranId, veteran);
+			if (veteran == null) {
 				response.setStatus(404);
-
 			}
 		} catch (Exception e) {
 			response.setStatus(400);
+			veteran = null;
 		}
-		return false;
+		return veteran;
+	}
+
+
+	@DeleteMapping("veterans/{veteranId}")
+	public void destroy(HttpServletRequest req, HttpServletResponse res, @PathVariable int veteranId) {
+		try {
+			boolean deleted = svc.destroy(veteranId);
+			if (deleted) {
+				res.setStatus(204);
+			} else {
+				res.setStatus(404);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			res.setStatus(400);
+		}
 	}
 }

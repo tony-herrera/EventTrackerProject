@@ -1,5 +1,5 @@
 export class Veteran {
-  vetId: number;
+  id: number;
   firstName: string;
   lastName: string;
   branch: string;
@@ -10,10 +10,9 @@ export class Veteran {
   eaos: string;
   assignRecruiter: string;
   dutyStation: string;
-  types: any[];
 
   constructor(
-    vetId?: number,
+    id?: number,
     firstName?: string,
     lastName?: string,
     branch?: string,
@@ -23,10 +22,9 @@ export class Veteran {
     dodSkillBridge?: string,
     eaos?: string,
     assignRecruiter?: string,
-    dutyStation?: string,
-    types?: any[]
+    dutyStation?: string
   ) {
-    this.vetId = vetId;
+    this.id = id;
     this.firstName = firstName;
     this.lastName = lastName;
     this.branch = branch;
@@ -37,6 +35,5 @@ export class Veteran {
     this.eaos = eaos;
     this.assignRecruiter = assignRecruiter;
     this.dutyStation = dutyStation;
-    this.types = types ? types : [];
   }
 }

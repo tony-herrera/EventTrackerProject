@@ -1,11 +1,9 @@
 package com.skilldistillery.garrison.services;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.skilldistillery.garrison.entities.Veteran;
 import com.skilldistillery.garrison.repositories.VeteranRepository;
 
@@ -21,8 +19,8 @@ public class VeteranServiceImpl implements VeteranService {
 	}
 
 	@Override
-	public Veteran findById(int veteranId) {
-		return vetRepo.findById(veteranId);
+	public Veteran findById(int id) {
+		return vetRepo.findById(id);
 	}
 
 	@Override
@@ -32,38 +30,36 @@ public class VeteranServiceImpl implements VeteranService {
 	}
 
 	@Override
-	public Veteran updateVeteran(Integer id, Veteran veteran) {
+	public Veteran updateVeteran(int id, Veteran veteran) {
+		System.out.println(veteran);
+		Veteran managedVet = vetRepo.findById(id);
 
-		Optional<Veteran> veteranOp = vetRepo.findById(id);
-		if (veteranOp.isPresent()) {
-			Veteran vet = veteranOp.get();
-			vet.setFirstName(vet.getFirstName());
-			vet.setLastName(vet.getFirstName());
-			vet.setBranch(vet.getBranch());
-			vet.setEaos(vet.getEaos());
-			vet.setAssignRecruiter(vet.getAssignRecruiter());
-			vet.setDutyStation(vet.getDutyStation());
-			vet.setEmail(vet.getEmail());
-			vet.setPhoneNumber(vet.getPhoneNumber());
-			vet.setCareerInterest(vet.getCareerInterest());
-			vet.setDodSkillBridge(vet.getDodSkillBridge());
+		if (managedVet != null) {
+			managedVet.setFirstName(veteran.getFirstName());
+			managedVet.setLastName(veteran.getFirstName());
+			managedVet.setBranch(veteran.getBranch());
+			managedVet.setEaos(veteran.getEaos());
+			managedVet.setAssignRecruiter(veteran.getAssignRecruiter());
+			managedVet.setDutyStation(veteran.getDutyStation());
+			managedVet.setEmail(veteran.getEmail());
+			managedVet.setPhoneNumber(veteran.getPhoneNumber());
+			managedVet.setCareerInterest(veteran.getCareerInterest());
+			managedVet.setDodSkillBridge(veteran.getDodSkillBridge());
 
 			vetRepo.saveAndFlush(veteran);
-		} else {
-			veteran = null;
 		}
-		return veteran;
+		return managedVet;
 	}
 
 	@Override
-	public boolean deleteVeteran(Integer id) {
+	public boolean destroy(int id) {
 		boolean deleted = false;
-		Optional<Veteran> veteranOpt = vetRepo.findById(id);
-		if (veteranOpt.isPresent()) {
-			vetRepo.delete(veteranOpt.get());
-
+		Veteran veteran = vetRepo.findById(id);
+		if (veteran != null) {
+			vetRepo.delete(veteran);
 			deleted = true;
 		}
 		return deleted;
 	}
+
 }

@@ -1,6 +1,6 @@
 import { Veteran } from './../models/veteran';
 import { HttpClient } from '@angular/common/http';
-import { Injectable, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { HttpHeaders } from '@angular/common/http';
@@ -8,11 +8,11 @@ import { HttpHeaders } from '@angular/common/http';
 @Injectable({
   providedIn: 'root',
 })
-export class GarrisonService implements OnInit {
-  veterans: Veteran[] = [];
-
-   baseUrl = 'http://localhost:8085/';
+export class GarrisonService {
+  baseUrl = 'http://localhost:8085/';
   url = this.baseUrl + 'api/veterans';
+
+  constructor(private http: HttpClient) {}
 
   index(): Observable<Veteran[]> {
     return this.http.get<Veteran[]>(this.url + '?sorted=true').pipe(
@@ -28,20 +28,39 @@ export class GarrisonService implements OnInit {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        Authorization: 'my-auth-token',
       }),
     };
-    this.veterans.push(veteran);
-    return this.http
-      .post<any>(this.url, veteran, httpOptions)
-      .pipe(catchError(this.handleError()));
-  }
-  handleError(): (err: any, caught: Observable<any>) => import("rxjs").ObservableInput<any> {
-    throw new Error('Method not implemented.');
+    console.log(veteran);
+    return this.http.post<any>(this.url, veteran, httpOptions).pipe(
+      catchError((theError) => {
+        console.error('error creating veteran');
+        console.error(theError);
+        return throwError('error in creating veteran');
+      })
+    );
   }
 
-  constructor(private http: HttpClient) {}
-  ngOnInit(): void {
-    throw new Error('Method not implemented.');
+  update(veterans: Veteran): Observable<Veteran> {
+    console.log(veterans.id);
+
+    return this.http.put<Veteran>(this.url + '/' + veterans.id, veterans).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        console.log(veterans);
+        return throwError('Error updating todo list');
+        console.log(veterans);
+      })
+    );
+  }
+
+  destroy(veteranid: number): Observable<boolean> {
+    return this.http.delete<boolean>(this.url + '/' + veteranid).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError(
+          'GarrisonService.destroy(): Error deleting todo list'
+        );
+      })
+    );
   }
 }
