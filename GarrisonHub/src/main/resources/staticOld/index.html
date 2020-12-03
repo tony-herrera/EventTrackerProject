@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Welcome to Garrison</title>
+    <script type="text/javascript" src="js/eventTracker.js"></script>
+  </head>
+  <body>
+    <h1>Garrison Tracker</h1>
+	
+	<form name="veteranForm">
+        <input type="number" name="veteranId">
+        <button name="lookup">Get Veteran by Id</button>
+      </form>
+      <div id="output">
+        <div id="veteranData"></div>
+        <div id="veteranData"></div>
+      </div>
+      <hr>
+      <form name="newVeteranForm">
+        <input type="text" name="firstName" placeholder="First Name"> <br>
+        <input type="text" name="lastName" placeholder="Last Name"> <br>
+        <input type="text" name="email" placeholder="Email Address"> <br>
+        <input type="text" name="phoneNumber" placeholder="Phone Number"> <br>
+        <input type="text" name="eaos" placeholder="EAOS"> <br>
+        <input type="text" name="dutyStation" placeholder="Duty Station"> <br>
+        <input type="text" name="dodSkillBridge" placeholder="Skill Bridge?"> <br>
+        <input type="text" name="assignRecruiter" placeholder="Recruiter?"> <br>
+        <input type="text" name="careerInterest" placeholder="Career Field"> <br>
+        <input type="text" name="branch" placeholder="Branch"> <br>
+        <button type="submit" name="submit">Add Veteran</button>
+      </form>
+    
+     <div id="veteranInformation"></div>
+     </div>
+  </body>
+</html>

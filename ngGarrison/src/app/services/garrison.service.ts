@@ -4,12 +4,15 @@ import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { HttpHeaders } from '@angular/common/http';
-
+import { environment } from './../../environments/environment';
 @Injectable({
   providedIn: 'root',
 })
 export class GarrisonService {
-  baseUrl = 'http://localhost:8085/';
+  // baseUrl = 'http://localhost:8085/';
+  // baseUrl = '/GarrisonHub/';
+  baseUrl = environment.baseUrl;
+
   url = this.baseUrl + 'api/veterans';
 
   constructor(private http: HttpClient) {}
