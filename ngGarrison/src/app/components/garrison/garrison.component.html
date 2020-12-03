@@ -1,29 +1,8 @@
 <h1>
   Welcome to {{ title }} <br />
-  Total Number of Veterans Registered: {{ getNumOfVets() }}
 </h1>
 <h2>Join in the ranks of your fellow service members!!</h2>
-
-<table border="2" *ngIf="!selected">
-  <thead>
-    <tr>
-      <th>First Name</th>
-      <th>Last Name</th>
-      <th>EAOS</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let veteran of veterans">
-      <td (click)="displayVeteran(veteran)">{{ veteran.firstName }}</td>
-      <td (click)="displayVeteran(veteran)">{{ veteran.lastName }}</td>
-      <td (click)="displayVeteran(veteran)">{{ veteran.eaos }}</td>
-      <td>
-        <!-- <button (click)="deleteVeteran(veteran.vetId)">Delete Veteran</button> -->
-      </td>
-    </tr>
-  </tbody>
-</table>
-<hr style="height: 2px; border-width: 0; color: gray; background-color: gray" />
+<br>
 <h3>Fill Out The Form to Save Your Place in the Database</h3>
 <form *ngIf="!selected" #addVeteranForm="ngForm">
   <input
@@ -165,3 +144,25 @@
   <button (click)="updateVeteran(editVeteran)">Save</button>
   <button (click)="editVeteran = null">Cancel Changes</button>
 </form>
+<hr>
+<h2>Total Number of Veterans Registered: {{ getNumOfVets() }}</h2>
+<table border="2" *ngIf="!selected">
+  <thead>
+    <tr>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>EAOS</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let veteran of veterans">
+      <td (click)="displayVeteran(veteran)">{{ veteran.firstName }}</td>
+      <td (click)="displayVeteran(veteran)">{{ veteran.lastName }}</td>
+      <td (click)="displayVeteran(veteran)">{{ veteran.eaos }}</td>
+      <!-- <td> -->
+        <!-- <button (click)="deleteVeteran(veteran.vetId)">Delete Veteran</button> -->
+      <!-- </td> -->
+    </tr>
+  </tbody>
+</table>
+<hr style="height: 2px; border-width: 0; color: gray; background-color: gray" />
