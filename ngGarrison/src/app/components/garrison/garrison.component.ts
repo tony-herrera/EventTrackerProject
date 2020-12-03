@@ -120,5 +120,6 @@ export class GarrisonComponent implements OnInit {
         console.error(bad);
       }
     );
+    this.garrisonService.index();
   }
 }
